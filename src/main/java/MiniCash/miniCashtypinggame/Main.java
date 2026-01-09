@@ -6,9 +6,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import static MiniCash.miniCashtypinggame.MPublic.stt;
 
 public class Main implements CommandExecutor {
+    private final MiniCashtypinggame plugin;
+
+    public Main(MiniCashtypinggame plugin){
+        this.plugin = plugin;
+    }
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String @NotNull [] args) {
 
@@ -22,7 +26,7 @@ public class Main implements CommandExecutor {
 
                 try{
                     String ch =  args[1];
-                    stt(player,ch);
+                    plugin.stt(player,ch);
                 }catch(ArrayIndexOutOfBoundsException e){
                     player.sendMessage("§c入力方法を確認してください");
                 }
@@ -33,6 +37,7 @@ public class Main implements CommandExecutor {
         return true;
     }
 }
+
 
 
 
