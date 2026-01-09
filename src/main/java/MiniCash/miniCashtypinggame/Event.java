@@ -7,7 +7,8 @@ import org.bukkit.event.Listener;
 
 import java.util.UUID;
 
-import static MiniCash.miniCashtypinggame.MPublic.*;
+import static MiniCash.miniCashtypinggame.MiniCashtypinggame.*;
+
 
 public class Event implements Listener {
 
@@ -33,6 +34,7 @@ public class Event implements Listener {
     }
 
 }
+
 
 
 
