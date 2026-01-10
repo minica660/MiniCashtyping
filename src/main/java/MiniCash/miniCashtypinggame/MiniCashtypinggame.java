@@ -12,8 +12,10 @@ public final class MiniCashtypinggame extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
-        getCommand("mtyp").setExecutor(new Main(this));
+        Objects.requireNonNull(getCommand("mtyp")).setExecutor(new Main(this));
         getServer().getPluginManager().registerEvents(new Event(), this);
+
+
 
     }
 
@@ -21,15 +23,10 @@ public final class MiniCashtypinggame extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
     }
-    private final MiniCashtypinggame plugin;
-
-    public MiniCashtypinggame(MiniCashtypinggame plugin){
-        this.plugin = plugin;
-    }
     public static boolean game = false;
     public static List<String> list = new ArrayList<>();
     public static Map<UUID,Boolean> chatcheck = new HashMap<>();
-    public void stt(Player player, String chat){
+    public void stt(Player player, int timer,String chat){
 
 
         if (!game) {
@@ -39,12 +36,12 @@ public final class MiniCashtypinggame extends JavaPlugin {
 
             player.sendMessage("§e正解：§a" + chat + "§rに設定しました");
 
-            Bukkit.broadcastMessage("§eタイピング速度を競おう！！\n§a§l入力メッセージ" + chat);
+            Bukkit.broadcastMessage("§e§l " + timer + "秒以内に入力し§r§eタイピング速度を競おう！！\n§a§l入力メッセージ：§4" + chat);
 
 
 
-            Bukkit.getScheduler().runTaskLater(plugin, () -> {
-                String name = null;
+            Bukkit.getScheduler().runTaskLater(this, () -> {
+                String name = "§r";
                 game = false;
                 for (int i = 0; i < 5; i++) {
                     Bukkit.broadcastMessage("§c終了！！");
@@ -53,15 +50,22 @@ public final class MiniCashtypinggame extends JavaPlugin {
                 for(Player p : Bukkit.getOnlinePlayers()) {
                     if (chatcheck.containsKey(p.getPlayer().getUniqueId())){
                         name = name + p.getName() + " ";
+
+                        chatcheck.clear();
                     }
+
                 }
 
                 Bukkit.broadcastMessage("§5正解者：§7" + name);
-            }, 20 * 10);
 
+            }, 20L * timer);
+
+        }else {
+            player.sendMessage("§c§lすでにゲームが開始されています");
         }
 
     }
 
 
 }
+
