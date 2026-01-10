@@ -22,11 +22,12 @@ public class Main implements CommandExecutor {
                 return true;
             }
 
-            if (args[0].equalsIgnoreCase("start") && args.length == 2) {
+            if (args[0].equalsIgnoreCase("start") && args.length == 3) {
 
                 try{
-                    String ch =  args[1];
-                    plugin.stt(player,ch);
+                    int ti = Integer.parseInt(args[1]);
+                    String ch =  args[2];
+                    plugin.stt(player,ti,ch);
                 }catch(ArrayIndexOutOfBoundsException e){
                     player.sendMessage("§c入力方法を確認してください");
                 }
